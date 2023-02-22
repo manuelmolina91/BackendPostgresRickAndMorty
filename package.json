@@ -1,0 +1,21 @@
+{
+  "name": "BackendPostgresRickAndMorty",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/manuelmolina91/BackendPostgresRickAndMorty.git",
+  "author": "Manuel Molina Ramirez <manuel.molina.ramirez1991@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fetch": "^1.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.20",
+    "pg": "^8.9.0",
+    "sequelize": "^6.28.1"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
