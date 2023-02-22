@@ -1,6 +1,7 @@
 const db = require('../models')
 const User = db.User
-const bcrypt = require ('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const jsonwebtoken = require ('jsonwebtoken')
 const {getUserByEmail} = require('./users')
 const saltRounds = 10;
 

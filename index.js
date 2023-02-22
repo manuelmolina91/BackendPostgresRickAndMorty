@@ -1,14 +1,17 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const syncApi = require('./src/routes/syncApi')
+const charactersRoutes = require('./src/routes/characters.js')
+const syncApi = require ('./src/routes/syncApi')
 const db = require('./src/models')
+const userRouter = require('./src/routes/users.js')
+const authRoutes = require('./src/routes/auth')
 const dotenv = require('dotenv')
+const {ensureAuthentication} = require('./src/middelware/auth')
 const cors = require('cors')
 
 
-
-
 dotenv.config()
+
 
 const startApp = async () => {
     const app = express()
@@ -20,7 +23,16 @@ const startApp = async () => {
         extended: true
     }))
 
+    app.use(ensureAuthentication)
+    app.get('/', (request, response) => {
+        response.json('Aquí estoy')
+    })
+
+    app.use('/mars', charactersRoutes)
     app.use('/syncApi', syncApi)
+    app.use('/users', userRouter)
+    app.use('/auth', authRoutes)
+
 
 try {
     await db.sequelize.sync({force:false})
