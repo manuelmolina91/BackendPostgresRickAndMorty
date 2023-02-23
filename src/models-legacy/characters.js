@@ -1,6 +1,6 @@
 const { STRING } = require('sequelize')
 const Sequelize = require('sequelize')
-const db = require('../services/db')
+const db = require('../services/db-legacy')
 
 const Character = db.define('character', {
     id: {
