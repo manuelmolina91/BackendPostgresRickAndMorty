@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const { getCharacterList, getCharacterById, createCharacter, updateCharacter, removeCharacter } = require('../controllers/characters')
+const { getLocationList, getLocationById, createLocation, updateLocation, removeLocation } = require('../controllers/location')
 
 
 router.get('/', async (request, response) => {
     try {
-        const character = await getCharacterList()
-        response.status(200).json(character)
+        const location = await getLocationList()
+        response.status(200).json(location)
     } catch (error) {
         response.status(500)
     }
@@ -14,8 +14,8 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params
-        const character = await getCharacterById(id)
-        response.status(200).json(character)
+        const location = await getLocationById(id)
+        response.status(200).json(location)
     } catch (error) {
         response.status(500)
     }
@@ -24,8 +24,8 @@ router.get('/:id', async (request, response) => {
 router.post('/', async (request, response) => {
     try {
         const data = request.body
-        const character = await createCharacter(data)
-        response.status(200).json(character)
+        const location = await createLocation(data)
+        response.status(200).json(location)
     } catch (error) {
         response.status(500)
     }
@@ -35,8 +35,8 @@ router.put('/:id', async (request, response) => {
     try {
         const { id } = request.params
         const data = request.body
-        const character = await updateCharacter(id, data)
-        response.status(200).json(character)
+        const location = await updateLocation(id, data)
+        response.status(200).json(location)
     } catch (error) {
         response.status(500)
     }
@@ -45,7 +45,7 @@ router.put('/:id', async (request, response) => {
 router.delete('/:id', async (request, response) => {
     try {
         const { id } = request.params
-        await removeCharacter(id)
+        await removeLocation(id)
         response.status(200).json(true)
     } catch (error) {
         response.status(500)

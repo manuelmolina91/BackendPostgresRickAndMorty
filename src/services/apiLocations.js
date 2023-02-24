@@ -1,31 +1,30 @@
 const db = require('../models')
-const Character = db.Character
+const Location = db.Location
 
 
-async function getData(page) {
+async function getLocations(page) {
 
     console.log('ejecutando api')
 
     try {
-        console.log(`https://rickandmortyapi.com/api/character?page=${page}`)
-        const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+        console.log(`https://rickandmortyapi.com/api/location?page=${page}`)
+        const response = await fetch(`https://rickandmortyapi.com/api/location?page=${page}`)
         const data = await response.json()
         const results = data.results
         
        
         const dataResults = results.map(d => ({
-            characterId: d.id, 
+            locationId: d.id, 
             name: d.name,
-            status: d.status,
-            species: d.species,
-            image: d.image
+            type: d.type,
+            dimension: d.dimension
         }));
         
         const itemstoCreation = []
-        const existedResults = await Character.findAll()
+        const existedResults = await Location.findAll()
 
         for (const item of dataResults) {
-            const match = existedResults.find((existedResult) => existedResult.characterId === item.characterId)
+            const match = existedResults.find((existedResult) => existedResult.locationId === item.locationId)
             if (!match) {
                 itemstoCreation.push(item)
             }
@@ -33,7 +32,7 @@ async function getData(page) {
         // console.log(itemstoCreation)
         
         if (itemstoCreation.length > 0) {
-            Character.bulkCreate(itemstoCreation)
+            Location.bulkCreate(itemstoCreation)
             return 'Sincronizando base de datos'
         }
 
@@ -45,4 +44,4 @@ async function getData(page) {
     }
 }
 
-module.exports = getData
+module.exports = getLocations

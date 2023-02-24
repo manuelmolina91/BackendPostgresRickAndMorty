@@ -1,12 +1,11 @@
 const router = require('express').Router()
-const { request, response } = require('express')
-const { getLocationList, getLocationById, createLocation, updateLocation, removeLocation } = require('../controllers/locations')
+const { getEpisodeList, getEpisodeById, createEpisode, updateEpisode, removeEpisode } = require('../controllers/episode')
 
 
 router.get('/', async (request, response) => {
     try {
-        const location = await getLocationList()
-        response.status(200).json(location)
+        const episode = await getEpisodeList()
+        response.status(200).json(episode)
     } catch (error) {
         response.status(500)
     }
@@ -15,8 +14,8 @@ router.get('/', async (request, response) => {
 router.get('/:id', async (request, response) => {
     try {
         const { id } = request.params
-        const location = await getLocationById(id)
-        response.status(200).json(location)
+        const episode = await getEpisodeById(id)
+        response.status(200).json(episode)
     } catch (error) {
         response.status(500)
     }
@@ -25,8 +24,8 @@ router.get('/:id', async (request, response) => {
 router.post('/', async (request, response) => {
     try {
         const data = request.body
-        const location = await createLocation(data)
-        response.status(200).json(location)
+        const episode = await createEpisode(data)
+        response.status(200).json(episode)
     } catch (error) {
         response.status(500)
     }
@@ -36,8 +35,8 @@ router.put('/:id', async (request, response) => {
     try {
         const { id } = request.params
         const data = request.body
-        const location = await updateLocation(id, data)
-        response.status(200).json(location)
+        const episode = await updateEpisode(id, data)
+        response.status(200).json(episode)
     } catch (error) {
         response.status(500)
     }
@@ -46,7 +45,7 @@ router.put('/:id', async (request, response) => {
 router.delete('/:id', async (request, response) => {
     try {
         const { id } = request.params
-        await removeLocation(id)
+        await removeEpisode(id)
         response.status(200).json(true)
     } catch (error) {
         response.status(500)

@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const charactersRoutes = require('./src/routes/characters.js')
-const locationsRoutes = require('./src/routes/locations.js')
+const charactersRoutes = require('./src/routes/character.js')
 const syncApi = require ('./src/routes/syncApi')
 const db = require('./src/models')
 const userRouter = require('./src/routes/users.js')
@@ -30,7 +29,6 @@ const startApp = async () => {
     })
 
     app.use('/characters', charactersRoutes)
-    app.use('/locations', locationsRoutes)
     app.use('/syncApi', syncApi)
     app.use('/users', userRouter)
     app.use('/auth', authRoutes)

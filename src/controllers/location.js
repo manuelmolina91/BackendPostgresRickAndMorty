@@ -19,14 +19,14 @@ const createLocation = async ({ name }) => {
 const updateLocation = async (id, data) => {
     const location = await Location.update(data, {
         where: {
-            id
+            id 
         }
     })
     return location
 }
 
 const removeLocation = async (id) => {
-    await CharacterData.destroy({
+    await Location.destroy({
         where: {
             id
         }
