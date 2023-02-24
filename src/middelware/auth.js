@@ -2,7 +2,6 @@ const jsonwebtoken = require('jsonwebtoken')
 const db = require('../models/index')
 const User = db.User
 
-
 const ensureAuthentication = async (request, response, next) => {
     if (request.path.includes('/auth')) {
         return next()
@@ -28,7 +27,7 @@ const ensureAuthentication = async (request, response, next) => {
         return response.status(403).json('Wrong token')
     }
 
-    request.user = {id: user.id, email: user.email, name: user.name}
+    request.user = {id: user.id, email: user.email}
 
     next()
 }

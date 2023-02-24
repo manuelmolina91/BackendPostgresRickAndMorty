@@ -6,7 +6,7 @@ const {getUserByEmail} = require('./users')
 const saltRounds = 10;
 
 
-const signup = async ({name, email, password}) => {
+const signup = async ({email, password}) => {
     const existedUser = await getUserByEmail(email)
 
     if (existedUser) { 
@@ -14,9 +14,9 @@ const signup = async ({name, email, password}) => {
     }
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt)
-    const user = await User.create ({name, email, password:hashedPassword, salt}) 
+    const user = await User.create ({email, password:hashedPassword, salt}) 
 
-    return jsonwebtoken.sign(name, {email:user.email}, process.env.TOKEN_SECRET)
+    return jsonwebtoken.sign({email:user.email}, process.env.TOKEN_SECRET)
 }
 
 const login = async ({email, password}) => {
