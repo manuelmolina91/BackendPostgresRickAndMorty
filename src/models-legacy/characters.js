@@ -31,3 +31,4 @@ const Character = db.define('character', {
 },)
 
 module.exports = Character
+

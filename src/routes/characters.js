@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { getCharacterList, getCharacterById, createCharacter, updateCharacter, removeCharacter } = require('../controllers/character')
+const { request, response } = require('express')
+const { getCharacterList, getCharacterById, createCharacter, updateCharacter, removeCharacter } = require('../controllers/characters')
 
 
 router.get('/', async (request, response) => {
@@ -51,5 +52,7 @@ router.delete('/:id', async (request, response) => {
         response.status(500)
     }
 })
+
+
 
 module.exports = router

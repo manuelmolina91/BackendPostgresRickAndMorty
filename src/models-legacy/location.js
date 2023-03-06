@@ -26,3 +26,4 @@ const Location = db.define('character', {
 },)
 
 module.exports = Location
+

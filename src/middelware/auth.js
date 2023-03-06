@@ -21,7 +21,7 @@ const ensureAuthentication = async (request, response, next) => {
         return response.status(403).json('Invalid token')
     }
 
-    const user = await User.findOne({email: payload.email})
+    const user = await User.findOne ({ where:{ email: payload.email}})
 
     if (!user) {
         return response.status(403).json('Wrong token')

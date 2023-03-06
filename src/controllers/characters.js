@@ -1,23 +1,24 @@
-const db = require('../models')
-const Character = db.Character
+const models = require('../models')
 
 const getCharacterList = async () => {
-    const character = await Character.findAll()
+    const character = await models.Character.findAll({
+        order: [["id", "DESC"]]
+    })
     return character
 }
 
 const getCharacterById = async (id) => {
-    const character = await Character.findByPK(id)
+    const character = await  models.Character.findOne({where: {id}})
     return character
 }
 
 const createCharacter = async ({ name }) => {
-    const character = await Character.create({ name })
+    const character = await  models.Character.create({ name })
     return character
 }
 
 const updateCharacter = async (id, data) => {
-    const character = await Character.update(data, {
+    const character = await  models.Character.update(data, {
         where: {
             id 
         }
@@ -26,7 +27,7 @@ const updateCharacter = async (id, data) => {
 }
 
 const removeCharacter = async (id) => {
-    await Character.destroy({
+    await  models.Character.destroy({
         where: {
             id
         }

@@ -26,3 +26,4 @@ const Episode = db.define('character', {
 },)
 
 module.exports = Episode
+
