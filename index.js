@@ -37,7 +37,6 @@ const startApp = async () => {
     app.use('/auth', authRoutes)
     app.use('/episodes', episodesRoutes)
     app.use('/locations', locationsRoutes)
-    app.use('users', usersRoutes)
 
 
 
