@@ -19,7 +19,7 @@ router.get('/:id', async (request, response) => {
     } catch (error) {
         response.status(500)
     }
-})
+});
 
 router.post('/', async (request, response) => {
     try {

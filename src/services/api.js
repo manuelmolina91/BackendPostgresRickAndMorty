@@ -4,8 +4,6 @@ const Character = db.Character
 
 async function getData(page) {
 
-    console.log('ejecutando api')
-
     try {
         console.log(`https://rickandmortyapi.com/api/character?page=${page}`)
         const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
