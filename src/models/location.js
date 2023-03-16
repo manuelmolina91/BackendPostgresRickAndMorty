@@ -1,55 +1,45 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
+    class Location extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            User.belongsToMany(models.Character, {
-                through: 'userFavoritesCharacters',
-                as: 'favoritesCharacters',
-                foreignKey: 'user_id',
-                onDelete: 'cascade',
-            });
-            User.belongsToMany(models.Location, {
+            Location.belongsToMany(models.User, {
                 through: 'userFavoritesLocations',
                 as: 'favoritesLocations',
-                foreignKey: 'user_id',
-                onDelete: 'cascade',
-            });
-            User.belongsToMany(models.Episode, {
-                through: 'userFavoritesEpisode',
-                as: 'favoritesEpisodes',
-                foreignKey: 'user_id',
+                foreignKey: 'location_id',
                 onDelete: 'cascade',
             });
         }
     }
-    User.init(
+    Location.init(
         {
             id: {
-                allowNull: false,
-                primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-            },
-            email: {
-                type: DataTypes.STRING,
-                unique: true,
+                primaryKey: true,
                 allowNull: false,
             },
-            password: {
-                type: DataTypes.STRING,
+            location_id: {
+                type: DataTypes.INTEGER,
+                defaultValue: DataTypes.INTEGER,
                 allowNull: false,
             },
             name: {
                 type: DataTypes.STRING,
+                allowNull: false,
             },
-            salt: {
+            type: {
                 type: DataTypes.STRING,
+                allowNull: false,
+            },
+            dimension: {
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,
@@ -62,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'User',
+            modelName: 'Location',
         }
     );
-    return User;
+    return Location;
 };

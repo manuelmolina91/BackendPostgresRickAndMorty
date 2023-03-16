@@ -1,15 +1,15 @@
 version: '3.7'
 services:
-  db:
-    container_name: 'mortyapipostgres'
-    image: postgres:13-alpine
-    environment:
-      POSTGRES_USER: backend
-      POSTGRES_DB: backend
-      POSTGRES_PASSWORD: backend
-    ports:
-      - 5432:5432
-    volumes:
-      - db-data:/var/lib/postgresql/data
+    db:
+        container_name: 'RickMorty'
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_USER: rickmorty
+            POSTGRES_DB: rickmorty
+            POSTGRES_PASSWORD: rickmorty
+        ports:
+            - 5432:5432
+        volumes:
+            - db-data:/var/lib/postgresql/data
 volumes:
-  db-data: {}
+    db-data:

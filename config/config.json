@@ -1,8 +1,9 @@
 {
-  "development": {
-    "username": "backend",
-    "password": "backend",
-    "database": "backend",
-    "host": "localhost",
-    "dialect": "postgres"
-  }}
+    "development": {
+        "username": "rickmorty",
+        "password": "rickmorty",
+        "database": "rickmorty",
+        "host": "localhost",
+        "dialect": "postgres"
+    }
+}

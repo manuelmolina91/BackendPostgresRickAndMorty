@@ -1,55 +1,54 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
+    class Episode extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            User.belongsToMany(models.Character, {
-                through: 'userFavoritesCharacters',
-                as: 'favoritesCharacters',
-                foreignKey: 'user_id',
-                onDelete: 'cascade',
-            });
-            User.belongsToMany(models.Location, {
-                through: 'userFavoritesLocations',
-                as: 'favoritesLocations',
-                foreignKey: 'user_id',
-                onDelete: 'cascade',
-            });
-            User.belongsToMany(models.Episode, {
+            Episode.belongsToMany(models.User, {
                 through: 'userFavoritesEpisode',
                 as: 'favoritesEpisodes',
-                foreignKey: 'user_id',
+                foreignKey: 'episode_FK',
+                onDelete: 'cascade',
+            });
+            Episode.belongsToMany(models.Character, {
+                through: 'episodeCharacters',
+                as: 'charactersOfEpisode',
+                foreignKey: 'episode_FK',
                 onDelete: 'cascade',
             });
         }
     }
-    User.init(
+    Episode.init(
         {
             id: {
-                allowNull: false,
-                primaryKey: true,
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-            },
-            email: {
-                type: DataTypes.STRING,
-                unique: true,
+                primaryKey: true,
                 allowNull: false,
             },
-            password: {
-                type: DataTypes.STRING,
+            episode_id: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             name: {
                 type: DataTypes.STRING,
+                allowNull: false,
             },
-            salt: {
+            air_date: {
                 type: DataTypes.STRING,
+                allowNull: false,
+            },
+            episode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            characters: {
+                type: DataTypes.ARRAY(DataTypes.STRING),
+                allowNull: false,
             },
             createdAt: {
                 allowNull: false,
@@ -62,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             sequelize,
-            modelName: 'User',
+            modelName: 'Episode',
         }
     );
-    return User;
+    return Episode;
 };
